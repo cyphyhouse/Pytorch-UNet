@@ -6,8 +6,11 @@ Masking images can be automatically created using command
 python3 ./data/process_mask.py
 ```
 Masks can be created from RGB images with clear segmentation as shown below.
+
 ![Segmented Image](data/masks/img_orig_2500.jpg)
+
 The red region can be converted to masks as 
+
 ![Mask Image](data/label/img_orig_2500.png)
 
 ## Training using existing data
@@ -26,5 +29,7 @@ To test the obtained model, run command
 python3 predict.py -m $(checkpoint filename.pth) -i $(input image filename) -o $(output image filename)
 ```
 Currently predict.py is written to find the 4 corner of the strips at the beginning of the run way. An example result is shown below.
+
 ![Keypoint Image](Figure_1.png)
+
 The four keypoints detected are top left corner (red), bottom left corner (green), bottom right corner (blue), top right corner (yellow). 
