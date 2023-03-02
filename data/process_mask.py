@@ -17,6 +17,6 @@ if __name__ == "__main__":
         img_red_gray = cv2.cvtColor(img_red, cv2.COLOR_BGR2GRAY)
         img_binary = cv2.threshold(img_red_gray, 10, 255,cv2.THRESH_BINARY)[1]
         cv2.imshow('aaa',img_binary)
-        cv2.imwrite('./label/'+tmp[0]+'.png',img_binary)
+        cv2.imwrite('./data/label/'+tmp[0]+'.png',img_binary)
         cv2.waitKey(1)
         # continue
