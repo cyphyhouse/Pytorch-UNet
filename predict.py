@@ -132,8 +132,11 @@ if __name__ == '__main__':
         pixels_array = np.vstack((pixels[1],pixels[0])).T
         # print(pixels_array.shape)
         import matplotlib.pyplot as plt 
-        # plt.imshow(mask)
+        plt.figure()
+        plt.imshow(mask)
+        plt.figure()
         plt.imshow(img)
+        # plt.show()
         
         import scipy.spatial 
         hull = scipy.spatial.ConvexHull(pixels_array)
