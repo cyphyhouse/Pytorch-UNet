@@ -163,48 +163,4 @@ if __name__ == '__main__':
         upright_vertices = pts[upright[0],:]
         plt.plot(upright_vertices[:,0],upright_vertices[:,1],'y*')
 
-
-        # plt.plot(pts[:,0], pts[:,1],'g*')
-        # bottomleft = np.where((hull_vertices[:,0]<center_point[0]) & (hull_vertices[:,1]>center_point[1]))
-        # bottomleft_vertices = hull_vertices[bottomleft[0],:]
-        # diff = bottomleft_vertices - center_point
-        # tmp = np.argmax(np.linalg.norm(diff,axis=1)*np.cos(np.arctan2(diff[:,1], diff[:,0]))**2*np.sin(np.arctan2(diff[:,1], diff[:,0]))**2)
-        # bottomleft_vertex = bottomleft_vertices[tmp,:]
-        # # plt.plot(hull_vertices[bottomleft,0], hull_vertices[bottomleft,1],'g*')
-        # plt.plot(bottomleft_vertex[0], bottomleft_vertex[1], 'g*')
-        
-        # upleft = np.where((hull_vertices[:,0]<center_point[0]) & (hull_vertices[:,1]<center_point[1]))
-        # upleft_vertices = hull_vertices[upleft[0],:]
-        # diff = upleft_vertices - center_point
-        # tmp = np.argmax(np.linalg.norm(diff,axis=1)*np.cos(np.arctan2(diff[:,1], diff[:,0]))**2*np.sin(np.arctan2(diff[:,1], diff[:,0]))**2)
-        # upleft_vertex = upleft_vertices[tmp,:]
-        # # plt.plot(hull_vertices[upleft,0], hull_vertices[upleft,1],'g*')
-        # plt.plot(upleft_vertex[0], upleft_vertex[1], 'g*')
-        
-        # bottomright = np.where((hull_vertices[:,0]>center_point[0]) & (hull_vertices[:,1]>center_point[1]))
-        # bottomright_vertices = hull_vertices[bottomright[0],:]
-        # diff = bottomright_vertices - center_point
-        # tmp = np.argmax(np.linalg.norm(diff,axis=1)*np.cos(np.arctan2(diff[:,1], diff[:,0]))**2*np.sin(np.arctan2(diff[:,1], diff[:,0]))**2)
-        # bottomright_vertex = bottomright_vertices[tmp,:]
-        # # plt.plot(hull_vertices[bottomright,0], hull_vertices[bottomright,1],'g*')
-        # plt.plot(bottomright_vertex[0], bottomright_vertex[1], 'g*')
-        
-        # upright = np.where((hull_vertices[:,0]>center_point[0]) & (hull_vertices[:,1]<center_point[1]))
-        # upright_vertices = hull_vertices[upright[0],:]
-        # diff = upright_vertices - center_point
-        # tmp = np.argmax(np.linalg.norm(diff,axis=1)*np.cos(np.arctan2(diff[:,1], diff[:,0]))**2*np.sin(np.arctan2(diff[:,1], diff[:,0]))**2)
-        # upright_vertex = upright_vertices[tmp,:]
-        # # plt.plot(hull_vertices[upright,0], hull_vertices[upright,1],'g*')
-        # plt.plot(upright_vertex[0], upright_vertex[1], 'g*')
-        
         plt.show()
-
-        # if not args.no_save:
-        #     out_filename = out_files[i]
-        #     result = mask_to_image(mask, mask_values)
-        #     result.save(out_filename)
-        #     logging.info(f'Mask saved to {out_filename}')
-
-        # if args.viz:
-        #     logging.info(f'Visualizing results for image {filename}, close to continue...')
-        #     plot_img_and_mask(img, mask)
