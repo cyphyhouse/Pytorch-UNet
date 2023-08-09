@@ -1,6 +1,9 @@
 import numpy as np 
 import cv2
 from scipy.spatial.transform import Rotation 
+import os 
+
+script_dir = os.path.dirname(os.path.realpath(__file__))
 
 def gaussian(xL, yL, sigma, H, W):
 
@@ -45,40 +48,40 @@ def convert_to_image(world_pos, ego_pos, ego_ori):
     return pnt  
 
 if __name__ == "__main__":
-    for i in range(205, 11095):
+    for i in range(0, 50000):
         idx = i
         print(idx)
         # if idx == 6910:
         #     print("stop")
 
-        with open('/home/lucas/Research/VisionLand/Pytorch-UNet/data/data.txt','r') as f:
+        with open(os.path.join(script_dir, 'data.txt'),'r') as f:
             data = f.read()
             data = data.strip('\n').split('\n')
             pose = data[idx]
             pose = pose.split(',')
             pose = [float(elem) for elem in pose]
     
-        kp1 = [-1221.370483, 16.052534, 0.0] # (290, 327)
-        kp2 = [-1279.224854, 16.947235, 0.0] # (285, 346)
-        kp3 = [-1279.349731, 8.911615, 0.0] # (299, 346)
-        kp4 = [-1221.505737, 8.033512, 0.0] # (304, 327)
+        kp1 = [-1221.370483, 16.052534, 5.0] # (290, 327)
+        kp2 = [-1279.224854, 16.947235, 5.0] # (285, 346)
+        kp3 = [-1279.349731, 8.911615, 5.0] # (299, 346)
+        kp4 = [-1221.505737, 8.033512, 5.0] # (304, 327)
 
-        kp5 = [-1221.438110, -8.496282, 0.0] # (329, 327)
-        kp6 = [-1279.302002, -8.493725, 0.0] # (333, 346)
-        kp7 = [-1279.315796, -16.504263, 0.0] # (348, 346)
-        kp8 = [-1221.462402, -16.498976, 0.0] # (340, 327)
+        kp5 = [-1221.438110, -8.496282, 5.0] # (329, 327)
+        kp6 = [-1279.302002, -8.493725, 5.0] # (333, 346)
+        kp7 = [-1279.315796, -16.504263, 5.0] # (348, 346)
+        kp8 = [-1221.462402, -16.498976, 5.0] # (340, 327)
 
-        kp9 = [-1520.81, 26.125700, 0.0] # (290, 327)
-        kp10 = [-1559.122925, 26.101082,  0.0] # (285, 346)
-        kp11 = [-1559.157471, -30.753305,  0.0] # (299, 346)
-        kp12 = [-1520.886353,  -30.761044, 0.0] # (304, 327)
+        kp9 = [-1520.81, 26.125700, 5.0] # (290, 327)
+        kp10 = [-1559.122925, 26.101082,  5.0] # (285, 346)
+        kp11 = [-1559.157471, -30.753305,  5.0] # (299, 346)
+        kp12 = [-1520.886353,  -30.761044, 5.0] # (304, 327)
 
-        kp13 = [-1561.039063, 31.522200, 0.0] # (329, 327)
-        kp14 = [-1561.039795, -33.577713, 0.0] # (333, 346)
-        kp15 = [-600.0, 31.5, 0.0] # (348, 346)
-        kp16 = [-600.0, -23.5, 0.0] # (340, 327)
+        kp13 = [-1561.039063, 31.522200, 5.0] # (329, 327)
+        kp14 = [-1561.039795, -33.577713, 5.0] # (333, 346)
+        # kp15 = [-600.0, 31.5, 5.0] # (348, 346)
+        # kp16 = [-600.0, -23.5, 5.0] # (340, 327)
 
-        keypoint_list = [kp1, kp2, kp3, kp4, kp5, kp6, kp7, kp8, kp9, kp10, kp11, kp12, kp13, kp14, kp15, kp16]
+        keypoint_list = [kp1, kp2, kp3, kp4, kp5, kp6, kp7, kp8, kp9, kp10, kp11, kp12, kp13, kp14]
         num_keypoint = len(keypoint_list)
 
         offset_vec = np.array([-1.1*0.20,0,0.8*0.77])
@@ -104,7 +107,7 @@ if __name__ == "__main__":
             kp_vectors.append(u)
             kp_vectors.append(v)
 
-        img_fn = f'/home/lucas/Research/VisionLand/Pytorch-UNet/data/imgs/img_{idx}.png'
+        img_fn = os.path.join(script_dir, f'./imgs/img_{idx}.png')
         img = cv2.imread(img_fn)
 
         
@@ -125,7 +128,7 @@ if __name__ == "__main__":
 
         cv2.line(img, (u_vectors[12], v_vectors[12]), (u_vectors[13], v_vectors[13]),(0,0,255))
         # cv2.line(img, (u_vectors[13], v_vectors[13]), (u_vectors[14], v_vectors[14]),(0,0,255))
-        cv2.line(img, (u_vectors[14], v_vectors[14]), (u_vectors[15], v_vectors[15]),(0,0,255))
+        # cv2.line(img, (u_vectors[14], v_vectors[14]), (u_vectors[15], v_vectors[15]),(0,0,255))
         # cv2.line(img, (u_vectors[15], v_vectors[15]), (u_vectors[12], v_vectors[12]),(0,0,255))
 
         cv2.imshow('keypoints', img)
@@ -137,14 +140,14 @@ if __name__ == "__main__":
         cv2.waitKey(1)
 
         img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        cv2.imwrite(f"/home/lucas/Research/VisionLand/Pytorch-UNet/data/label_kp/img_marker_{idx}.png", img)
+        cv2.imwrite(os.path.join(script_dir, f"./label_kp/img_marker_{idx}.png"), img)
         # print("HM shape: ", hms.shape[0])
         for j in range(hms.shape[0]):
-            cv2.imwrite(f"/home/lucas/Research/VisionLand/Pytorch-UNet/data/label_kp/img_{idx}_{j}.png", hms[j,:,:]*255)
+            cv2.imwrite(os.path.join(script_dir, f"./label_kp/img_{idx}_{j}.png"), hms[j,:,:]*255)
 
-        cv2.imwrite(f"/home/lucas/Research/VisionLand/Pytorch-UNet/data/label_kp/img_{idx}_hm.png", hm_img*255)
+        cv2.imwrite(os.path.join(script_dir, f"./label_kp/img_{idx}_hm.png"), hm_img*255)
 
-        with open(f"/home/lucas/Research/VisionLand/Pytorch-UNet/data/label_kp/img_{idx}.txt", "w+") as f:
+        with open(os.path.join(script_dir, f"./label_kp/img_{idx}.txt"), "w+") as f:
             for i in range(num_keypoint):
                 f.write(f"{u_vectors[i]}, {v_vectors[i]}")
 
