@@ -1,8 +1,8 @@
 import shutil 
 import os 
 
-start = 10000
-end = 20000
+start = 00000
+end = 10000
 
 if __name__ == "__main__":
     os.mkdir("data/imgs_batch/")

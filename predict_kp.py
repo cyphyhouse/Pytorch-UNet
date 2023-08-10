@@ -46,7 +46,7 @@ def get_args():
     parser.add_argument('--no-save', '-n', action='store_true', help='Do not save the output masks')
     parser.add_argument('--mask-threshold', '-t', type=float, default=0.5,
                         help='Minimum probability value to consider a mask pixel white')
-    parser.add_argument('--scale', '-s', type=float, default=0.5,
+    parser.add_argument('--scale', '-s', type=float, default=1.0,
                         help='Scale factor for the input images')
     parser.add_argument('--bilinear', action='store_true', default=False, help='Use bilinear upsampling')
     parser.add_argument('--classes', '-c', type=int, default=2, help='Number of classes')
@@ -104,7 +104,7 @@ if __name__ == '__main__':
     in_files = args.input
     out_files = get_output_filenames(args)
 
-    net = UNet(n_channels=3, n_classes=16, bilinear=args.bilinear)
+    net = UNet(n_channels=3, n_classes=14, bilinear=args.bilinear)
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     logging.info(f'Loading model {args.model}')
@@ -156,12 +156,12 @@ if __name__ == '__main__':
         p12[0].reverse()
         p13 = (((output[0,5+8,:,:]==torch.max(output[0,5+8,:,:])).nonzero())/args.scale).tolist()
         p13[0].reverse()
-        p14 = (((output[0,6+8,:,:]==torch.max(output[0,6+8,:,:])).nonzero())/args.scale).tolist()
-        p14[0].reverse()
-        p15 = (((output[0,7+8,:,:]==torch.max(output[0,7+8,:,:])).nonzero())/args.scale).tolist()
-        p15[0].reverse()
+        # p14 = (((output[0,6+8,:,:]==torch.max(output[0,6+8,:,:])).nonzero())/args.scale).tolist()
+        # p14[0].reverse()
+        # p15 = (((output[0,7+8,:,:]==torch.max(output[0,7+8,:,:])).nonzero())/args.scale).tolist()
+        # p15[0].reverse()
 
-        kps = p0+p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13+p14+p15
+        kps = p0+p1+p2+p3+p4+p5+p6+p7+p8+p9+p10+p11+p12+p13
 
         # # print(np.max(mask))
         # # print(np.min(mask))
@@ -173,7 +173,7 @@ if __name__ == '__main__':
         # plt.figure()
         # plt.imshow(mask)
         
-        for i in range(16):
+        for i in range(14):
             plt.figure()
             plt.imshow(output[0,i,:,:])
 

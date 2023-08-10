@@ -19,9 +19,13 @@ from unet import UNet
 from utils.data_loading import BasicDataset, CarvanaDataset, RunwayDataset, RunwayDataset2
 from utils.dice_score import dice_loss
 
-dir_img = Path('/home/lucas/Research/VisionLand/Pytorch-UNet/data/imgs_batch/')
-dir_mask = Path('/home/lucas/Research/VisionLand/Pytorch-UNet/data/label_kp_batch/')
-dir_checkpoint = Path('/home/lucas/Research/VisionLand/Pytorch-UNet/checkpoints/')
+import os 
+
+script_dir = os.path.dirname(os.path.realpath(__file__))
+
+dir_img = Path(os.path.join(script_dir,'./data/imgs_batch/'))
+dir_mask = Path(os.path.join(script_dir,'./data/label_kp_batch/'))
+dir_checkpoint = Path(os.path.join(script_dir,'./checkpoints/'))
 
 
 def train_model(
