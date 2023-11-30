@@ -7,6 +7,7 @@ import torch
 import torch.nn.functional as F
 from PIL import Image
 from torchvision import transforms
+import cv2 
 
 from utils.data_loading import BasicDataset
 from unet import UNet
@@ -181,6 +182,18 @@ if __name__ == '__main__':
         plt.imshow(img)
         plt.plot(np.array(kps)[:,0],np.array(kps)[:,1],'r*')
         
+        # print(img)
+        cv2_img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
+        for i in range(14):
+            # cv2.drawMarker(
+            #     cv2_img, (np.array(kps)[i,0],np.array(kps)[i,1]), color = (0,0,255), markerType=cv2.circle, 
+            #    markerSize=3, thickness=2, line_type=cv2.LINE_AA
+            # )
+            cv2.circle(cv2_img, (int(np.array(kps)[i,0]),int(np.array(kps)[i,1])), 3, (0,0,255), 2)
+
+        print(args.input)
+        input_fn = args.input[0].split('.p')[0] 
+        cv2.imwrite(input_fn+"_marker.png", cv2_img)
         # import scipy.spatial 
         # hull = scipy.spatial.ConvexHull(pixels_array)
         # # plt.plot(pixels_array[hull.vertices,0],pixels_array[hull.vertices,1],'r*')
