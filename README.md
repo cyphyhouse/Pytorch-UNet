@@ -16,19 +16,19 @@ The red region can be converted to masks as
 ## Training using existing data
 The training data are located in folder ``data/imgs`` and the training masks are located in folder ``data/label``. To train a new model, run command 
 ```
-python3 train.py
+python3 train_kp2.py
 ```
 in the root folder of the repo. Detailed command for how the script works can be found by using command 
 ```
-python3 train.py -h
+python3 train_kp2.py -h
 ```
 
 ## Feature point extraction using existing model
 To test the obtained model, run command 
 ```
-python3 predict.py -m $(checkpoint filename.pth) -i $(input image filename) -o $(output image filename)
+python3 predict_kp.py -m $(checkpoint filename.pth) -i $(input image filename) -o $(output image filename)
 ```
-Currently predict.py is written to find the 4 corner of the strips at the beginning of the run way. An example result is shown below.
+Currently predict_kp.py is written to find the 4 corner of the strips at the beginning of the run way. An example result is shown below.
 
 ![Keypoint Image](Figure_1.png)
 
